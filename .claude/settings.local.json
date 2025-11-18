@@ -34,7 +34,9 @@
       "Bash(npx vercel deploy:*)",
       "WebFetch(domain:docs.claude.com)",
       "Bash(npm run lint)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(echo \"원격 저장소 URL을 설정해야 합니다. 다음 명령어로 원격 저장소를 추가하세요:\n\ngit remote add origin <your-repository-url>\ngit push -u origin main\n\n예시:\ngit remote add origin https://github.com/username/repository-name.git\ngit push -u origin main\")",
+      "WebFetch(domain:ddugi-3-1qwqfabg9-phs0309s-projects.vercel.app)"
     ],
     "deny": [],
     "ask": []

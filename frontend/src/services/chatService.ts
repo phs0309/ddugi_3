@@ -18,8 +18,10 @@ export interface SendMessageResponse {
 class ChatService {
   async sendMessage(request: SendMessageRequest): Promise<ApiResponse<any>> {
     try {
-      // Enhanced chat API 사용 (구조화된 JSON 응답)
-      const response = await api.post<ApiResponse<any>>('/enhanced-chat', request);
+      // 새로운 간단한 chat API 사용
+      const response = await api.post<ApiResponse<any>>('/chat', {
+        message: request.message
+      });
       return response.data;
     } catch (error: any) {
       console.error('Chat service error:', error);
