@@ -57,18 +57,48 @@ export class NewChatController {
 
   async health(req: Request, res: Response) {
     try {
-      // Claude API 연결 상태 확인
-      const testResponse = await claudeService.processChat('안녕하세요');
-      
-      res.json({
-        status: 'healthy',
-        timestamp: new Date().toISOString(),
-        ai: {
-          claude: 'connected',
-          naver: 'configured' // 네이버 API 설정 여부만 확인
-        },
-        version: '2.0.0'
+      // 환경 변수 확인
+      const hasClaudeAPI = !!process.env.ANTHROPIC_API_KEY;
+      const hasNaverClientId = !!process.env.NAVER_CLIENT_ID;
+      const hasNaverSecret = !!process.env.NAVER_CLIENT_SECRET;
+      const hasNaverAPI = hasNaverClientId && hasNaverSecret;
+
+      logger.info('Health check - Environment status:', {
+        hasClaudeAPI,
+        hasNaverClientId,
+        hasNaverSecret,
+        nodeEnv: process.env.NODE_ENV
       });
+
+      // 간단한 Claude 테스트 (실제로는 호출하지 않고 설정만 확인)
+      let claudeStatus = hasClaudeAPI ? 'configured' : 'missing';
+      let naverStatus = hasNaverAPI ? 'configured' : 'missing';
+
+      const overallStatus = hasClaudeAPI ? 'healthy' : 'degraded';
+      
+      const response = {
+        status: overallStatus,
+        timestamp: new Date().toISOString(),
+        services: {
+          claude: {
+            status: claudeStatus,
+            required: true
+          },
+          naver: {
+            status: naverStatus,
+            required: false,
+            note: naverStatus === 'missing' ? 'Will use Claude-only mode' : 'Real-time search enabled'
+          }
+        },
+        version: '2.0.0',
+        features: {
+          basicChat: hasClaudeAPI,
+          realTimeSearch: hasNaverAPI
+        }
+      };
+
+      const httpStatus = hasClaudeAPI ? 200 : 503;
+      res.status(httpStatus).json(response);
       
     } catch (error) {
       logger.error('Health check failed:', error);
@@ -76,7 +106,8 @@ export class NewChatController {
       res.status(503).json({
         status: 'unhealthy',
         timestamp: new Date().toISOString(),
-        error: 'AI service unavailable'
+        error: 'Health check failed',
+        details: process.env.NODE_ENV === 'development' ? error : undefined
       });
     }
   }

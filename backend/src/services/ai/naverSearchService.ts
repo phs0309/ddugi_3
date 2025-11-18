@@ -23,7 +23,17 @@ export class NaverSearchService {
     this.clientSecret = process.env.NAVER_CLIENT_SECRET || '';
 
     if (!this.clientId || !this.clientSecret) {
-      logger.warn('Naver API credentials not configured');
+      logger.error('Naver API credentials not configured. Please set NAVER_CLIENT_ID and NAVER_CLIENT_SECRET');
+      logger.info('Environment check:', {
+        hasClientId: !!this.clientId,
+        hasClientSecret: !!this.clientSecret,
+        nodeEnv: process.env.NODE_ENV
+      });
+    } else {
+      logger.info('Naver API initialized successfully', {
+        clientIdLength: this.clientId.length,
+        hasSecret: !!this.clientSecret
+      });
     }
   }
 
@@ -37,6 +47,8 @@ export class NaverSearchService {
       // 부산 지역으로 한정하여 검색
       const query = `부산 ${keyword}`;
       
+      logger.info(`Searching Naver API for: "${query}" (max: ${maxResults})`);
+
       const response = await axios.get(`${this.baseUrl}/local.json`, {
         params: {
           query: query,
@@ -48,10 +60,14 @@ export class NaverSearchService {
           'X-Naver-Client-Id': this.clientId,
           'X-Naver-Client-Secret': this.clientSecret,
           'User-Agent': 'travel-ai-service/1.0.0'
-        }
+        },
+        timeout: 10000 // 10초 타임아웃
       });
 
-      if (!response.data.items) {
+      logger.info(`Naver API response status: ${response.status}, total: ${response.data.total || 0}, items: ${response.data.items?.length || 0}`);
+
+      if (!response.data.items || response.data.items.length === 0) {
+        logger.warn(`No results found for query: ${query}`);
         return [];
       }
 
@@ -68,11 +84,33 @@ export class NaverSearchService {
         mapy: item.mapy || ''
       }));
 
-      logger.info(`Naver search found ${cleanedResults.length} results for: ${query}`);
+      logger.info(`Successfully processed ${cleanedResults.length} results for: ${query}`);
+      
+      // 첫 번째 결과 미리보기 (디버깅용)
+      if (cleanedResults.length > 0) {
+        logger.info(`First result preview: ${cleanedResults[0].title} - ${cleanedResults[0].address}`);
+      }
+
       return cleanedResults;
 
-    } catch (error) {
-      logger.error('Naver search error:', error);
+    } catch (error: any) {
+      if (error.response) {
+        logger.error(`Naver API error - Status: ${error.response.status}, Data:`, error.response.data);
+        
+        // 401 에러인 경우 API 키 문제 안내
+        if (error.response.status === 401) {
+          logger.error('Naver API authentication failed. Please check NAVER_CLIENT_ID and NAVER_CLIENT_SECRET');
+        }
+        // 429 에러인 경우 요청 제한 안내
+        else if (error.response.status === 429) {
+          logger.error('Naver API rate limit exceeded. Please try again later');
+        }
+      } else if (error.request) {
+        logger.error('Naver API network error - no response received:', error.message);
+      } else {
+        logger.error('Naver API request setup error:', error.message);
+      }
+      
       return [];
     }
   }

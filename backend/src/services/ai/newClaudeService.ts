@@ -24,6 +24,13 @@ export class NewClaudeService {
     });
 
     this.naverSearch = new NaverSearchService();
+    
+    // 초기화 시 설정 상태 로깅
+    logger.info('NewClaudeService initialized', {
+      hasClaudeAPI: !!apiKey,
+      hasNaverAPI: this.naverSearch.isConfigured(),
+      nodeEnv: process.env.NODE_ENV
+    });
   }
 
   async processChat(message: string): Promise<ChatResponse> {
@@ -112,19 +119,36 @@ export class NewClaudeService {
   }
 
   private async searchTravelInfo(keywords: string[]): Promise<any[]> {
+    if (!this.naverSearch.isConfigured()) {
+      logger.warn('Naver API not configured, skipping search');
+      return [];
+    }
+
     const searchResults: any[] = [];
+    
+    logger.info(`Starting travel info search for ${keywords.length} keywords: ${keywords.join(', ')}`);
 
     for (const keyword of keywords) {
       try {
+        logger.info(`Searching for keyword: ${keyword}`);
         // 네이버 검색 API로 실제 정보 수집
         const results = await this.naverSearch.search(keyword, 3); // 키워드당 최대 3개
-        searchResults.push(...results);
+        
+        if (results.length > 0) {
+          logger.info(`Found ${results.length} results for keyword: ${keyword}`);
+          searchResults.push(...results);
+        } else {
+          logger.warn(`No results found for keyword: ${keyword}`);
+        }
       } catch (error) {
-        logger.warn(`Search failed for keyword: ${keyword}`, error);
+        logger.error(`Search failed for keyword: ${keyword}`, error);
       }
     }
 
-    return searchResults.slice(0, 10); // 전체 최대 10개
+    const finalResults = searchResults.slice(0, 10); // 전체 최대 10개
+    logger.info(`Total search results collected: ${finalResults.length}`);
+    
+    return finalResults;
   }
 
   private async generateFinalAnswer(claudeResponse: string, searchResults: any[]): Promise<string> {
