@@ -1,0 +1,269 @@
+{
+    "siteName": "GuideGeek",
+    "description": "AI Travel Genius - Personal travel assistant",
+    
+    "colorPalette": {
+      "primary": {
+        "yellow": "rgb(255, 201, 95)",
+        "darkPurple": "rgb(43, 38, 66)",
+        "goldAccent": "rgb(234, 194, 111)"
+      },
+      "neutral": {
+        "white": "rgb(255, 255, 255)",
+        "black": "rgb(0, 0, 0)",
+        "lightGray": "rgb(245, 245, 245)",
+        "darkGray": "rgb(64, 64, 64)",
+        "borderGray": "rgb(228, 228, 228)"
+      },
+      "alpha": {
+        "whiteTransparent": "rgba(255, 255, 255, 0.35)"
+      }
+    },
+  
+    "typography": {
+      "fontFamily": {
+        "primary": "\"Albert Sans\", sans-serif",
+        "secondary": "Arial"
+      },
+      "mainHeading": {
+        "fontSize": "85px",
+        "fontWeight": "700",
+        "color": "rgb(43, 38, 66)",
+        "lineHeight": "normal",
+        "text": "Meet your personal travel genius"
+      },
+      "subHeading": {
+        "fontSize": "32px",
+        "fontWeight": "700",
+        "color": "rgb(255, 255, 255)"
+      },
+      "body": {
+        "fontSize": "21px",
+        "fontWeight": "400",
+        "color": "rgb(43, 38, 66)"
+      },
+      "smallText": {
+        "fontSize": "13px",
+        "fontWeight": "400"
+      },
+      "inputText": {
+        "fontSize": "18px",
+        "fontFamily": "Arial"
+      }
+    },
+  
+    "hero": {
+      "background": {
+        "type": "image",
+        "url": "https://guidegeek.com/images/home-hero-bg.jpg",
+        "size": "cover",
+        "position": "50% 50%",
+        "description": "Sunset/sunrise gradient sky with clouds"
+      },
+      "height": "914px",
+      "layout": {
+        "display": "flex",
+        "flexDirection": "column",
+        "alignItems": "center",
+        "justifyContent": "center"
+      }
+    },
+  
+    "chatInterface": {
+      "container": {
+        "maxWidth": "890px",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "borderRadius": "99px",
+        "padding": "10px 15px",
+        "boxShadow": "rgba(0, 0, 0, 0.1) 0px 5px 10px 0px",
+        "border": "none"
+      },
+      "input": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "borderRadius": "99px",
+        "padding": "20px",
+        "fontSize": "18px",
+        "fontFamily": "Arial",
+        "color": "rgb(0, 0, 0)",
+        "border": "1px solid rgb(228, 228, 228)",
+        "placeholder": "Ask me anything about travel!",
+        "height": "auto",
+        "minHeight": "21px"
+      },
+      "sendButton": {
+        "backgroundColor": "rgb(255, 201, 95)",
+        "color": "rgb(0, 0, 0)",
+        "borderRadius": "100%",
+        "width": "48px",
+        "height": "48px",
+        "padding": "1px 6px",
+        "border": "none",
+        "iconColor": "rgb(0, 0, 0)"
+      },
+      "sparkleIcon": {
+        "position": "left",
+        "size": "24px",
+        "color": "rgb(255, 201, 95)"
+      }
+    },
+  
+    "buttons": {
+      "suggestion": {
+        "backgroundColor": "rgb(255, 255, 255)",
+        "color": "rgb(0, 0, 0)",
+        "borderRadius": "99px",
+        "padding": "10px 15px",
+        "fontSize": "13px",
+        "fontWeight": "400",
+        "border": "none",
+        "boxShadow": "none",
+        "hoverEffect": "subtle shadow or color change",
+        "examples": [
+          "Greek islands with few tourists",
+          "Family road trip to National Parks in Utah",
+          "Bachelorette party in Nashville"
+        ]
+      },
+      "cta": {
+        "backgroundColor": "rgb(255, 201, 95)",
+        "color": "rgb(0, 0, 0)",
+        "borderRadius": "99px",
+        "padding": "12px 24px",
+        "fontSize": "16px",
+        "fontWeight": "500"
+      }
+    },
+  
+    "icons": {
+      "style": "outlined/filled mix",
+      "primaryColor": "rgb(255, 201, 95)",
+      "secondaryColor": "rgb(255, 255, 255)",
+      "sizes": {
+        "small": "26px",
+        "medium": "40px",
+        "large": "55px"
+      },
+      "types": [
+        "airplane",
+        "sparkle/star",
+        "location/map",
+        "search"
+      ]
+    },
+  
+    "spacing": {
+      "containerPadding": "0px",
+      "sectionGap": "60px",
+      "elementGap": "20px",
+      "buttonGap": "10px"
+    },
+  
+    "effects": {
+      "shadows": {
+        "chatContainer": "rgba(0, 0, 0, 0.1) 0px 5px 10px 0px",
+        "button": "none",
+        "card": "rgba(0, 0, 0, 0.08) 0px 2px 8px 0px"
+      },
+      "transitions": {
+        "default": "all 0.3s ease",
+        "fast": "all 0.15s ease"
+      },
+      "hover": {
+        "buttonScale": "1.02",
+        "shadowIncrease": "0px 8px 16px rgba(0, 0, 0, 0.15)"
+      }
+    },
+  
+    "layout": {
+      "maxContentWidth": "1400px",
+      "breakpoints": {
+        "mobile": "768px",
+        "tablet": "1024px",
+        "desktop": "1440px"
+      },
+      "grid": {
+        "columns": 12,
+        "gap": "24px"
+      }
+    },
+  
+    "branding": {
+      "logo": {
+        "url": "https://guidegeek.com/images/guidegeek-logo-animated.webp",
+        "width": "220px",
+        "height": "126px",
+        "animated": true
+      },
+      "tagline": "AI Travel Genius",
+      "subTagline": "Plan complex trips in minutes. Real time info for flights, stays, restaurants and experiences"
+    },
+  
+    "assets": {
+      "backgroundImages": [
+        {
+          "name": "hero-background",
+          "url": "https://guidegeek.com/images/home-hero-bg.jpg",
+          "usage": "Main hero section background",
+          "style": "Sunset/sunrise sky with pink and purple clouds"
+        },
+        {
+          "name": "dmo-background",
+          "url": "https://guidegeek.com/images/home-dmo-bg.jpg",
+          "usage": "Secondary section background"
+        }
+      ],
+      "contentImages": [
+        {
+          "name": "about-image",
+          "url": "https://guidegeek.com/images/home-about-dude.jpg",
+          "dimensions": "800x665"
+        },
+        {
+          "name": "app-screenshot",
+          "url": "https://guidegeek.com/images/home-try-app.jpg",
+          "dimensions": "800x1653",
+          "usage": "Mobile app interface showcase"
+        }
+      ]
+    },
+  
+    "designPrinciples": {
+      "style": "Modern, clean, friendly",
+      "colorScheme": "Warm yellow/gold primary with purple accents",
+      "shapes": "Rounded, pill-shaped elements (border-radius: 99px)",
+      "whitespace": "Generous, breathable spacing",
+      "imagery": "Travel-focused, aspirational, natural landscapes",
+      "userExperience": "Conversational, approachable, AI-powered assistant"
+    },
+  
+    "chatBubbleStyles": {
+      "userMessage": {
+        "backgroundColor": "rgb(255, 201, 95)",
+        "color": "rgb(0, 0, 0)",
+        "borderRadius": "20px 20px 4px 20px",
+        "padding": "12px 16px",
+        "maxWidth": "70%",
+        "align": "right"
+      },
+      "assistantMessage": {
+        "backgroundColor": "rgb(245, 245, 245)",
+        "color": "rgb(0, 0, 0)",
+        "borderRadius": "20px 20px 20px 4px",
+        "padding": "12px 16px",
+        "maxWidth": "70%",
+        "align": "left"
+      },
+      "timestamp": {
+        "fontSize": "11px",
+        "color": "rgb(128, 128, 128)",
+        "marginTop": "4px"
+      }
+    },
+  
+    "animations": {
+      "logoAnimation": "Animated WebP format",
+      "buttonHover": "Scale and shadow transition",
+      "inputFocus": "Border color and shadow change",
+      "messageAppear": "Fade in from bottom"
+    }
+  }

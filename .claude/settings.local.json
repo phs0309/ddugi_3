@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npx mcp-server-vercel:*)",
+      "Bash(git clone:*)",
+      "Bash(npm install)",
+      "WebSearch",
+      "Bash(npm install:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp:*)",
+      "Read(//c/Users/phs02/**)",
+      "WebFetch(domain:vercel.com)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(rm:*)",
+      "Bash(git checkout:*)",
+      "Bash(git branch:*)",
+      "mcp__vercel__list_teams",
+      "mcp__vercel__list_projects",
+      "mcp__vercel__list_deployments",
+      "mcp__vercel__get_deployment_build_logs",
+      "mcp__vercel__get_deployment",
+      "mcp__vercel__web_fetch_vercel_url",
+      "WebFetch(domain:ddugi-3.vercel.app)",
+      "Bash(echo \"Vercel CLI 명령어 예시:\nvercel env add ANTHROPIC_API_KEY\nvercel env add GOOGLE_SEARCH_API_KEY\nvercel env add GOOGLE_SEARCH_ENGINE_ID\nvercel env add NODE_ENV production\")",
+      "Bash(git pull:*)",
+      "Bash(git submodule:*)",
+      "Bash(git rm:*)",
+      "mcp__vercel__deploy_to_vercel",
+      "Bash(npx vercel deploy:*)",
+      "WebFetch(domain:docs.claude.com)",
+      "Bash(npm run lint)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
